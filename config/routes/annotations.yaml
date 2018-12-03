@@ -1,0 +1,9 @@
+controllers:
+    resource: ../../src/Controller/
+    type: annotation
+
+# toutes les routes définies dans les controleurs contenus dans le répertoire admin sont préfixées par /admin
+admin:
+    resource: ../../src/Controller/Admin
+    type: annotation
+    prefix: /admin
