@@ -112,6 +112,8 @@ class CategoryController extends AbstractController
         $em->remove($category);
         $em->flush();
 
+
+
         $this->addFlash(
             'success',
             'La catégorie est supprimée'

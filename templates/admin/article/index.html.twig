@@ -2,4 +2,35 @@
 
 {% block body %}
     <h1>Gestion des articles</h1>
+    <p>
+        <a href="{{ path('app_admin_article_edit') }}">
+            Ajouter un article
+        </a>
+    </p>
+        <table class="table table-hover">
+            <tr class="table-dark">
+                <th>Id</th>
+                <th>Categorie</th>
+                <th>Auteur</th>
+                <th>Titre</th>
+                <th>Date de publication</th>
+                <th width="100px"></th>
+                <th></th>
+            </tr>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.category.name }}</td>
+                    <td>{{ article.author }}</td>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.publicationDate | date('d/m/Y H:i:s') }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_article_edit', {id:article.id}) }}" class="btn btn-primary">Modifier</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('app_admin_article_delete', {id:article.id}) }}" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
 {% endblock %}
