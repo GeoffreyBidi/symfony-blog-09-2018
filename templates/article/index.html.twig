@@ -3,5 +3,41 @@
 {% block body %}
 
     <h1>{{ article.title }}</h1>
+    <h2>
+        Par {{ article.author }},
+        <em>{{ article.publicationDate | date('d/m/Y h:i:s') }}</em>
+    </h2>
+    <strong>Dans {{ article.category }}</strong>
+    {% if article.image is not null %}
+        <div>
+            <img src="{{ asset('images/' ~ article.image) }}" alt="">
+        </div>
+    {% endif %}
+    <p>{{ article.content | nl2br }}</p>
 
+    <h2>Commentaires :</h2>
+    {% if app.user is not empty %}
+
+        {{ form_start(form) }}
+        {{ form_row(form.content) }}
+
+        <button type="submit" class="btn btn-success">
+            Enregistrer
+        </button>
+        {{ form_end(form) }}
+    {% else %}
+        <div class="alert alert-info">Merci de vous <a href="{{ path('app_security_login') }}">connecter</a> pour poster un commentaire</div>
+    {% endif %}
+
+    {% for comment in article.comments  %}
+        Par : <strong>{{ comment.user }}</strong>
+        <br>
+        le : <em>{{ comment.publicationDateComment | date('d/m/Y H:i:s') }}</em>
+        <br>
+        <p> {{ comment.content }}</p>
+        <hr>
+    {% else %}
+        <p>Aucun commentaire pour cet artcile</p>
+    {% endfor %}
+    
 {% endblock %}

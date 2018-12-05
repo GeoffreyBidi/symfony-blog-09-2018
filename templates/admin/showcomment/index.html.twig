@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for commentaire in commentaires %}
+        <p>{{ commentaire.content }}</p>
+    {% endfor %}
+{% endblock %}

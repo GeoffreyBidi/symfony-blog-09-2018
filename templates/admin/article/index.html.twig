@@ -14,6 +14,7 @@
                 <th>Auteur</th>
                 <th>Titre</th>
                 <th>Date de publication</th>
+                <th>Nombre de commentaires</th>
                 <th width="100px"></th>
                 <th></th>
             </tr>
@@ -24,6 +25,7 @@
                     <td>{{ article.author }}</td>
                     <td>{{ article.title }}</td>
                     <td>{{ article.publicationDate | date('d/m/Y H:i:s') }}</td>
+                    <td><a href="{{ path('app_admin_showcomment_index', {id:article.id}) }}">{{ article.comments.count }}</a></td>
                     <td>
                         <a href="{{ path('app_admin_article_edit', {id:article.id}) }}" class="btn btn-primary">Modifier</a>
                     </td>

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -55,9 +57,18 @@ class Article
      */
     private $image;
 
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
+     * @ORM\OrderBy({"publicationDateComment":"desc"})
+     */
+    private $comments;
+
+
     public function __construct()
     {
         $this->setPublicationDate(new \DateTime());
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,6 +164,30 @@ class Article
     {
         $this->image = $image;
         return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Collection $comments
+     * @return Article
+     */
+    public function setComments(Collection $comments): Article
+    {
+        $this->comments = $comments;
+        return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->content;
     }
 
 
